@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --color-primary: #1D72D5; 
+    --color-white: #FFFFFF;
+    --color-primary-2: #0083C9;  
+    --color-text-primary: #CCCCCC;
+    --color-text-secondary: #AAAAAA;
+    --color-white-5: #FFFFFF0D;
+    --color-white-30: #FFFFFF4D;
+    --color-white-d7: #D7D7D7;
+    --color-white-14: #FFFFFF14;
+    --color-white-10: #FFFFFF1A;
+    --color-white-33: #08080833;
+    --color-white-33: #FFFFFF33;
+    --color-text-secondary-gray: #BBBBBB;
+    --color-text-secondary-gray-2: #858585;
+    --color-text-secondary-gray-3: #98989A;
+    --color-text-secondary-gray-4: #E6E6E6;
+    --color-black-gradient: #2E2E2E;
+    --color-black-gradient-2: #262626;
+    --color-black-gradient-3: #2E2E2E00;
+    --color-black-gradient-4: #2E2E2E;
+    --color-blue-gradient: #01446C; 
+    --color-blue-gradient-2: #004B8D; 
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    overflow-x: clip;
+  }
+
+  body {
+    font-family: "Poppins", sans-serif;
+    background-color: #000;
+    overflow-x: clip;
+  }
+
+  [id] {
+    scroll-margin-top: 120px;
+  }
+}
+
+/* @layer components {
+  .section-container {
+    width: 100%;
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .section-container {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .section-container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+} */
+
+/* Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f0f0f;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary);
+  border-radius: 9999px;
+  border: 2px solid #0f0f0f;
+  transition: background-color 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    
+  background-color: #155ba8;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary) #0f0f0f;
+}
