@@ -187,7 +187,7 @@ const goNext = () => {
 .case-study-dot {
   width: 0.75rem;
   height: 0.75rem;
-  border-radius: 0.25rem;
+  border-radius: 999.25rem;
   background: #fff;
   animation: dot-blink 1.3s steps(1, end) infinite;
 }

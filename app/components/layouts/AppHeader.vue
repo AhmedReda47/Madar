@@ -15,12 +15,12 @@
 
       <nav class="hidden items-center gap-8 text-lg text-white lg:flex">
         <NuxtLink to="/#home" class="nav-link" :class="{ 'nav-link-active': activeSection === 'home' }">Home</NuxtLink>
-        <NuxtLink to="/#portfolio" class="nav-link" :class="{ 'nav-link-active': activeSection === 'portfolio' }">Portfolio</NuxtLink>
-        <NuxtLink to="/#about-us" class="nav-link" :class="{ 'nav-link-active': activeSection === 'about-us' }">About Us</NuxtLink>
-        <NuxtLink to="/#services" class="nav-link" :class="{ 'nav-link-active': activeSection === 'services' }">Services</NuxtLink>
+        <NuxtLink to="/about-us" class="nav-link" :class="{ 'nav-link-active': route.path === '/about-us' }">About Us</NuxtLink>
+        <NuxtLink to="/services" class="nav-link" :class="{ 'nav-link-active': route.path === '/services' }">Services</NuxtLink>
+        <NuxtLink to="/portfolio" class="nav-link" :class="{ 'nav-link-active': route.path === '/portfolio' }">Portfolio</NuxtLink>
       </nav>
 
-      <PrimaryButton class="hidden bg-primary px-6 py-2 text-lg text-white shadow-lg lg:inline-flex">
+      <PrimaryButton class="hidden bg-primary px-6 py-2 text-lg text-white shadow-lg lg:inline-flex" @click="goToContact">
         Start a Project
       </PrimaryButton>
 
@@ -60,12 +60,12 @@
 
         <nav class="flex flex-col gap-5 text-xl text-white md:text-lg">
           <NuxtLink to="/#home" class="nav-link-mobile text-left" @click="closeMenu">Home</NuxtLink>
-          <NuxtLink to="/#services" class="nav-link-mobile text-left" @click="closeMenu">Services</NuxtLink>
-          <NuxtLink to="/#portfolio" class="nav-link-mobile text-left" @click="closeMenu">Portfolio</NuxtLink>
-          <NuxtLink to="/#about-us" class="nav-link-mobile text-left" @click="closeMenu">About Us</NuxtLink>
+          <NuxtLink to="/services" class="nav-link-mobile text-left" @click="closeMenu">Services</NuxtLink>
+          <NuxtLink to="/portfolio" class="nav-link-mobile text-left" @click="closeMenu">Portfolio</NuxtLink>
+          <NuxtLink to="/about-us" class="nav-link-mobile text-left" @click="closeMenu">About Us</NuxtLink>
         </nav>
 
-        <PrimaryButton class="menu-cta mt-8 w-full bg-primary py-2 text-base text-white md:mt-6 md:py-2 md:text-sm" @click="closeMenu">
+        <PrimaryButton class="menu-cta mt-8 w-full bg-primary py-2 text-base text-white md:mt-6 md:py-2 md:text-sm" @click="goToContact">
           Start a Project
         </PrimaryButton>
       </div>
@@ -85,6 +85,11 @@ const route = useRoute()
 
 const closeMenu = () => {
   isMenuOpen.value = false
+}
+
+const goToContact = async () => {
+  closeMenu()
+  await navigateTo('/contact')
 }
 
 const updateActiveSection = () => {

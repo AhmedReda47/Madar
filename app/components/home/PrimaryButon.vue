@@ -1,5 +1,5 @@
 <template>
-  <button class="rounded-full text-white">
+  <button class="rounded-full text-white hover:border-transparent transition-all duration-200 ease-in-out">
     <slot />
   </button>
 </template>
@@ -7,13 +7,11 @@
 </script>
 <style scoped>
 button {
-  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+  transition: all 0.25s ease-in-out;
 }
 
 button:hover {
-  background-color: var(--color-primary);
-  border-color: var(--color-primary);
-  color: var(--color-white);
-  transform: translateY(-3px);
+  background-color: var(--color-primary-dark) !important;
+  transform: translateY(-3px) !important;
 }
 </style>

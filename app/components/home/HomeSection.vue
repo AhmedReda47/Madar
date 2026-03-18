@@ -17,20 +17,24 @@
     ></div>
     <div class="absolute inset-x-0 top-1/2 z-10 -translate-y-1/2 px-4 sm:px-6 lg:px-8">
       <div class="mx-auto flex w-full max-w-4xl flex-col items-center text-center">
-        <h1 class="text-white text-3xl font-medium leading-tight min-[390px]:text-[2.15rem] sm:text-4xl md:text-5xl lg:text-[3.5rem] lg:leading-[1.25]">
+        <h1 class="text-white text-2xl font-medium leading-tight md:text-[2rem] sm:text-4xl md:text-5xl lg:text-5xl lg:leading-[1.25]">
           <span class="font-bold">Madar</span> Software Company for Web, Mobile, and Product Design
         </h1>
         <div class="mt-3 flex flex-col gap-4">
-          <p class="text-text-primary text-base font-medium leading-7 sm:text-lg md:text-xl md:leading-9">
+          <p class="text-text-primary text-sm font-medium leading-7 sm:text-lg md:text-xl md:leading-9">
             We Design and Build Website, mobile app and Dashboard that help StartUp Lanch and Grow With Confidece
           </p>
-          <div class="flex w-full flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4 md:gap-6">
-            <PrimaryButton class="w-full border border-white/30 !bg-white/5 px-6 py-3 text-sm font-semibold sm:w-auto">
-              Start a Project
-            </PrimaryButton>
-            <PrimaryButton class="w-full border border-white/30 !bg-white/5 px-6 py-3 text-sm font-semibold sm:w-auto">
-              Free consultation
-            </PrimaryButton>
+          <div class="flex w-full items-center justify-center gap-3 sm:gap-4 md:gap-6">
+            <NuxtLink to="/contact" class="w-1/2 flex-1 sm:w-auto">
+              <PrimaryButton class="bg-primary w-full !bg-white/5 px-6 py-3 text-xs font-medium sm:text-lg">
+                Start a Project
+              </PrimaryButton>
+            </NuxtLink>
+            <NuxtLink to="/free-consultation" class="w-1/2 flex-1 sm:w-auto">
+              <PrimaryButton class="w-full border border-white/30 !:hover:border-transparent !bg-white/5 px-6 py-3 text-xs font-medium sm:text-lg">
+                Free consultation
+              </PrimaryButton>
+            </NuxtLink>
           </div>
         </div>
       </div>

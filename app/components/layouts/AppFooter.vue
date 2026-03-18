@@ -39,9 +39,9 @@
           />
           <nav class="flex flex-wrap items-center justify-start gap-4 font-medium text-text-secondary-gray-4 sm:gap-5">
             <NuxtLink to="/#home" class="footer-nav-link">Home</NuxtLink>
-            <NuxtLink to="/#portfolio" class="footer-nav-link">Portfolio</NuxtLink>
-            <NuxtLink to="/#about-us" class="footer-nav-link">About Us</NuxtLink>
-            <NuxtLink to="/#services" class="footer-nav-link">Services</NuxtLink>
+            <NuxtLink to="/services" class="footer-nav-link">Services</NuxtLink>
+            <NuxtLink to="/about-us" class="footer-nav-link">About Us</NuxtLink>
+            <NuxtLink to="/portfolio" class="footer-nav-link">Portfolio</NuxtLink>
           </nav>
 
           <div class="flex items-center gap-2 rounded-xl border border-black-gradient-2 bg-white/5 px-4 py-2 sm:gap-3 sm:px-6 sm:py-3">

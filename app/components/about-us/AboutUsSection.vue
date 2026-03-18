@@ -15,8 +15,8 @@
       </div>
 
       <div class="space-y-5">
-        <SectionHeader class="font-semibold font-inter [&_span]:bg-white [&_span]:h-2.5 [&_span]:w-2.5 [&_p]:bg-blue-gradient-2 [&_p]:w-fit [&_p]:rounded [&_p]:text-white [&_p]:text-xs [&_p]:px-3 [&_p]:py-1.5 [&_h2]:text-5xl mb-10" align="left" label="Our Vision" title="What did we strive to achieve?" />
-        <p class="max-w-[42rem] text-base text-text-secondary font-normal font-inter">
+        <SectionHeader class="font-semibold font-inter [&_span]:bg-white [&_span]:h-2.5 [&_span]:w-2.5 [&_p]:bg-blue-gradient-2 [&_p]:w-fit [&_p]:rounded [&_p]:text-white [&_p]:text-xs [&_p]:px-3 [&_p]:py-1.5 [&_h2]:text-3xl md:[&_h2]:text-5xl mb-3  " align="left" label="Our Vision" title="What did we strive to achieve?" />
+        <p class="max-w-[42rem] text-base text-text-secondary font-normal font-inter !mt-0">
           We strive to reshape the future by delivering exceptional experiences that seamlessly blend
           creativity, simplicity, and smart technology.
         </p>

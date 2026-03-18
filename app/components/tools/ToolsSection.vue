@@ -36,7 +36,7 @@
         <NuxtImg
           src="/images/MadarLogo.png"
           alt="Madar company logo"
-          class="h-auto w-[9.5rem] object-contain sm:w-[12rem] lg:w-[14rem]"
+          class="h-auto w-[4rem] object-contain sm:w-[12rem] lg:w-[14rem]"
           loading="lazy"
           decoding="async"
           format="webp"

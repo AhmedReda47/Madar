@@ -27,6 +27,7 @@ export default {
         "white-33": "var(--color-white-33)",
         "white-14": "var(--color-white-14)",
         "white-d7": "var(--color-white-d7)",
+        "primary-dark": "var(--color-primary-dark)",
       },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],

@@ -1,15 +1,15 @@
 <template>
   <section id="team" ref="sectionRef" class="lg:px-16 px-5 sm:px-8">
-    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+    <div class="grid grid-cols-2 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
       <div v-for="item in stats" :key="item.label" class="flex justify-center">
-        <PrimaryCard :value="item.value" :label="item.label" :start="startCount" />
+        <TeamCard :value="item.value" :label="item.label" :start="startCount" />
       </div>
     </div>
     <SectionHeader class="[&_span]:bg-primary mt-28" label="OUR GLOBAL TEAM" title="We have a distinguished team for all services" />
 
     <Swiper
       class="team-swiper mt-10"
-      :modules="[Autoplay, Pagination]"
+      :modules="[Autoplay]"
       :centered-slides="true"
       :loop="true"
       :grab-cursor="true"
@@ -22,7 +22,7 @@
       @slideChange="onSlideChange"
     >
       <SwiperSlide v-for="member in teamMembers" :key="member.id">
-        <article class="relative mx-auto h-[22rem] w-[15rem] overflow-hidden rounded-2xl sm:h-[24rem] sm:w-[16.5rem] lg:h-[25rem] lg:w-[17.5rem]">
+        <article class="team-member-card relative mx-auto h-[22rem] w-full max-w-[15rem] overflow-hidden rounded-2xl sm:h-[24rem] sm:max-w-[16.5rem] lg:h-[25rem] lg:max-w-[17.5rem]">
           <NuxtImg
             :src="member.image"
             :alt="`Team member ${member.name}, ${member.role}`"
@@ -35,38 +35,30 @@
           />
           <div class="absolute inset-0 bg-gradient-to-b from-black/10 via-black/30 to-black/80"></div>
           <div class="team-card-gradient absolute bottom-0 left-0 z-[1] h-[15.99rem] w-full"></div>
-          <div class="team-socials absolute right-4 top-1/2 z-10 flex -translate-y-1/2 flex-col gap-3">
-            <a
-              :href="member.linkedin"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex h-10 w-10 items-center justify-center rounded-full border bg-black/90 text-white transition hover:bg-blue-gradient border-blue-gradient"
-              aria-label="LinkedIn"
-            >
-              <NuxtImg :src="LinkedinPrimary" alt="" class="h-[1.125rem;] w-[1.125rem;] object-contain" width="18" height="18" loading="lazy" decoding="async" />
-            </a>
-            <a 
-              :href="member.facebook"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex h-10 w-10 items-center justify-center rounded-full border bg-black/90 text-white transition hover:bg-blue-gradient border-blue-gradient"
-              aria-label="Facebook"
-            >
-              <NuxtImg :src="FacebookPrimary" alt="" class="h-[1.125rem;] w-[1.125rem;] object-contain" width="18" height="18" loading="lazy" decoding="async" />
-            </a>
-            <a
-              :href="member.twitter"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-blue-gradient bg-black/90 hover:bg-blue-gradient text-white transition"
-              aria-label="Twitter"
-            >
-              <NuxtImg :src="TwitterPrimary" alt="" class="h-[1.125rem;] w-[1.125rem;] object-contain" width="18" height="18" loading="lazy" decoding="async" />
-            </a>
-          </div>
           <div class="absolute bottom-5 left-5 z-10">
             <h3 class="text-3xl font-medium text-white">{{ member.name }}</h3>
             <p class="font-normal text-text-primary mt-1">{{ member.role }}</p>
+            <div class="team-socials mt-3 flex items-center gap-4">
+              <a
+                :href="member.linkedin"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="team-social-link"
+                aria-label="LinkedIn"
+              >
+                <NuxtImg :src="LinkedinPrimary" alt="" class="h-6 w-6 object-contain" width="24" height="24" loading="lazy" decoding="async" />
+              </a>
+              <a
+                v-if="isUiUxRole(member.role)"
+                :href="member.behance || '#'"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="team-social-link team-social-behance"
+                aria-label="Behance"
+              >
+                Be
+              </a>
+            </div>
           </div>
         </article>
       </SwiperSlide>
@@ -86,17 +78,14 @@
   </section>
 </template>
 <script setup lang="ts">
-import FacebookPrimary from '~/assets/icons/facebook-primary.svg'
 import LinkedinPrimary from '~/assets/icons/linkedin-primary.svg'
-import TwitterPrimary from '~/assets/icons/twitter-primary.svg'
 import { onBeforeUnmount, onMounted, ref } from 'vue'
-import { Autoplay, Pagination } from 'swiper/modules'
+import { Autoplay } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import type { Swiper as SwiperType } from 'swiper/types'
-import PrimaryCard from './TeamCard.vue'
+import TeamCard from './TeamCard.vue'
 import SectionHeader from '../ui/SectionHeader.vue'
 import 'swiper/css'
-import 'swiper/css/pagination'
 
 const stats = [
   { value: 50, label: 'Complete website' },
@@ -112,8 +101,7 @@ const teamMembers = [
     role: 'UI/UX Designer',
     image: '/images/Video.png',
     linkedin: 'https://www.linkedin.com',
-    facebook: 'https://www.facebook.com',
-    twitter: 'https://x.com',
+    behance: 'https://www.behance.net',
   },
   {
     id: 2,
@@ -121,8 +109,7 @@ const teamMembers = [
     role: 'Frontend Developer',
     image: '/images/Video.png',
     linkedin: 'https://www.linkedin.com',
-    facebook: 'https://www.facebook.com',
-    twitter: 'https://x.com',
+    behance: 'https://www.behance.net',
   },
   {
     id: 3,
@@ -130,8 +117,6 @@ const teamMembers = [
     role: 'Backend Developer',
     image: '/images/Video.png',
     linkedin: 'https://www.linkedin.com',
-    facebook: 'https://www.facebook.com',
-    twitter: 'https://x.com',
   },
   {
     id: 4,
@@ -139,8 +124,6 @@ const teamMembers = [
     role: 'Product Designer',
     image: '/images/Video.png',
     linkedin: 'https://www.linkedin.com',
-    facebook: 'https://www.facebook.com',
-    twitter: 'https://x.com',
   },
   {
     id: 5,
@@ -148,8 +131,6 @@ const teamMembers = [
     role: 'Project Manager',
     image: '/images/Video.png',
     linkedin: 'https://www.linkedin.com',
-    facebook: 'https://www.facebook.com',
-    twitter: 'https://x.com',
   },
   {
     id: 6,
@@ -157,8 +138,7 @@ const teamMembers = [
     role: 'UI/UX Designer',
     image: '/images/Video.png',
     linkedin: 'https://www.linkedin.com',
-    facebook: 'https://www.facebook.com',
-    twitter: 'https://x.com',
+    behance: 'https://www.behance.net',
   },
   {
     id: 7,
@@ -166,18 +146,25 @@ const teamMembers = [
     role: 'Frontend Developer',
     image: '/images/Video.png',
     linkedin: 'https://www.linkedin.com',
-    facebook: 'https://www.facebook.com',
-    twitter: 'https://x.com',
+  },
+  {
+    id: 8,
+    name: 'test Ahmed',
+    role: 'Frontend Developer',
+    image: '/images/Video.png',
+    linkedin: 'https://www.linkedin.com',
   },
 ]
 
+const isUiUxRole = (role: string) => role.toLowerCase().includes('ui/ux')
+
 const swiperBreakpoints = {
-  360: { slidesPerView: 1.15, spaceBetween: 12 },
-  390: { slidesPerView: 1.25, spaceBetween: 12 },
-  640: { slidesPerView: 1.8, spaceBetween: 16 },
-  768: { slidesPerView: 2.2, spaceBetween: 18 },
-  1024: { slidesPerView: 3, spaceBetween: 22 },
-  1280: { slidesPerView: 3.2, spaceBetween: 24 },
+  360: { slidesPerView: 1.5, spaceBetween: 2 },
+  390: { slidesPerView: 1.5, spaceBetween: 2 },
+  640: { slidesPerView: 2.5, spaceBetween: 4 },
+  768: { slidesPerView: 3, spaceBetween: 6 },
+  1024: { slidesPerView: 3.5, spaceBetween: 6 },
+  1280: { slidesPerView: 5, spaceBetween: 2 },
 }
 
 const swiperInstance = ref<SwiperType | null>(null)
@@ -224,19 +211,44 @@ onBeforeUnmount(() => {
 </script>
 <style scoped>
 .team-swiper :deep(.swiper-slide) {
-  opacity: 0.5;
-  transition: opacity 0.3s ease;
+  opacity: 0.65;
+  transition: opacity 0.35s ease;
+}
+
+.team-swiper :deep(.swiper-slide .team-member-card) {
+  transform: scale(0.66);
+  transform-origin: center center;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.team-swiper :deep(.swiper-slide-prev .team-member-card),
+.team-swiper :deep(.swiper-slide-next .team-member-card) {
+  transform: scale(0.82);
 }
 
 .team-swiper :deep(.swiper-slide-active) {
   opacity: 1;
+  z-index: 3;
 }
 
-.team-swiper :deep(.team-socials) {
+.team-swiper :deep(.swiper-slide-active .team-member-card) {
+  transform: scale(1);
+  box-shadow: 0 0 28px rgba(0, 131, 201, 0.24);
+}
+
+.team-social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.team-socials {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transform: translateY(-50%) translateX(8px);
+  transform: translateY(6px);
   transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
 }
 
@@ -244,7 +256,18 @@ onBeforeUnmount(() => {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
-  transform: translateY(-50%) translateX(0);
+  transform: translateY(0);
+}
+
+.team-social-link:hover {
+  transform: translateY(-2px);
+  opacity: 0.85;
+}
+
+.team-social-behance {
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1;
 }
 
 .team-card-gradient {
@@ -266,6 +289,6 @@ onBeforeUnmount(() => {
 .team-dot-active {
   background: #0083c9;
   transform: scale(1.05);
-  width: 20px;
+  width: 30px;
 }
 </style>

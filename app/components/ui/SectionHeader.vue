@@ -1,9 +1,9 @@
 <template>
   <div :class="containerClass">
     <p :class="labelClass">
-      <span class="blink-dot inline-block h-3 w-3 rounded "></span>{{ label }}
+      <span class="blink-dot inline-block h-3 w-3 rounded-full "></span>{{ label }}
     </p>
-    <h2 class="text-white text-2xl leading-tight sm:text-4xl md:text-[2rem] lg:text-[2.5rem] mt-3">{{ title }}</h2>
+    <h2 class="mt-3 text-white text-sm leading-tight sm:text-xl md:text-2xl lg:text-4xl">{{ title }}</h2>
   </div>
 </template>
 <script setup lang="ts">
@@ -26,8 +26,8 @@ const containerClass = computed(() =>
 
 const labelClass = computed(() =>
   props.align === 'left'
-    ? 'font-medium text-primary-2 flex items-center justify-start gap-3'
-    : 'font-medium text-primary-2 flex items-center justify-center gap-3',
+    ? 'font-medium text-primary-2 text-xs sm:text-sm md:text-base flex items-center justify-start gap-3'
+    : 'font-medium text-primary-2 text-xs sm:text-sm md:text-base flex items-center justify-center gap-3',
 )
 </script>
 <style scoped>

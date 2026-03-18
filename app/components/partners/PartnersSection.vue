@@ -18,23 +18,17 @@
     >
       <SwiperSlide v-for="partner in partners" :key="partner.name + partner.id">
         <article class="partner-card">
-          <span class="partner-mark">◎</span>
-          <span class="partner-name">{{ partner.name }}</span>
+          <NuxtImg
+            src="/images/partener-logo.png"
+            :alt="`${partner.name} logo`"
+            class="h-14 w-full object-contain"  
+            loading="lazy"
+            decoding="async"
+            format="webp"
+          />
         </article>
       </SwiperSlide>
     </Swiper>
-
-    <div class="mt-4 flex items-center justify-center gap-2">
-      <button
-        v-for="(_, index) in partners"
-        :key="`partner-dot-${index}`"
-        type="button"
-        class="partner-dot"
-        :class="{ 'partner-dot-active': activeDot === index }"
-        :aria-label="`Go to partner ${index + 1}`"
-        @click="goToSlide(index)"
-      ></button>
-    </div>
   </section>
 </template>
 <script setup lang="ts">
@@ -54,15 +48,19 @@ const partners = [
   { id: 5, name: 'Orinex' },
   { id: 6, name: 'Mallora' },
   { id: 7, name: 'Avenix' },
+  { id: 7, name: 'Avenix' },
+  { id: 8, name: 'Avenix' },
+  { id: 9, name: 'Avenix' },
+  { id: 10, name: 'Avenix' },
 ]
 
 const swiperBreakpoints = {
-  360: { slidesPerView: 1.2, spaceBetween: 8 },
-  390: { slidesPerView: 1.35, spaceBetween: 8 },
-  640: { slidesPerView: 1.8, spaceBetween: 10 },
-  768: { slidesPerView: 2.2, spaceBetween: 12 },
-  1024: { slidesPerView: 3, spaceBetween: 10 },
-  1280: { slidesPerView: 3.3, spaceBetween: 14 },
+  360: { slidesPerView: 2, spaceBetween: 8 },
+  390: { slidesPerView: 2.5, spaceBetween: 8 },
+  640: { slidesPerView: 3, spaceBetween: 10 },
+  768: { slidesPerView: 3.5, spaceBetween: 12 },
+  1024: { slidesPerView: 5, spaceBetween: 10 },
+  1280: { slidesPerView: 7, spaceBetween: 14 },
 }
 
 const swiperInstance = ref<SwiperType | null>(null)
