@@ -11,10 +11,11 @@ const route = useRoute()
 const requestURL = useRequestURL()
 const madarLogoPath = '/images/MadarLogo.png'
 const siteName = 'Madar'
+const siteSlogan = 'Build Your digital product'
 const siteUrl = computed(() => requestURL.origin)
 
 const defaultDescription =
-  'Madar is a software company delivering modern web and mobile solutions, UI/UX design, and scalable digital products that help businesses grow faster.'
+  `${siteSlogan}. Madar is a software company delivering modern web and mobile solutions, UI/UX design, and scalable digital products that help businesses grow faster.`
 
 const canonicalUrl = computed(() => new URL(route.path || '/', requestURL.origin).toString())
 const ogImageUrl = computed(() => new URL(madarLogoPath, requestURL.origin).toString())
@@ -39,6 +40,7 @@ const websiteSchema = computed(() => ({
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   name: siteName,
+  alternateName: siteSlogan,
   url: siteUrl.value,
   inLanguage: 'en',
 }))

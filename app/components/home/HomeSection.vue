@@ -18,7 +18,7 @@
     <div class="absolute inset-x-0 top-1/2 z-10 -translate-y-1/2 px-4 sm:px-6 lg:px-8">
       <div class="mx-auto flex w-full max-w-4xl flex-col items-center text-center">
         <h1 class="text-white text-2xl font-medium leading-tight md:text-[2rem] sm:text-4xl md:text-5xl lg:text-5xl lg:leading-[1.25]">
-          <span class="font-bold">Madar</span> Software Company for Web, Mobile, and Product Design
+          Build Your <span class="font-bold">digital</span> Product
         </h1>
         <div class="mt-3 flex flex-col gap-4">
           <p class="text-text-primary text-sm font-medium leading-7 sm:text-lg md:text-xl md:leading-9">

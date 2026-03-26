@@ -31,8 +31,9 @@ const madarLogoPath = '/images/MadarLogo.png'
 const sectionsRoot = ref<HTMLElement | null>(null)
 
 const homeTitle = 'Software Development and Digital Growth Services'
+const homeSlogan = 'Build Your digital product'
 const homeDescription =
-  'Madar helps businesses scale through web and mobile development, UI/UX design, and data-driven digital strategies tailored for measurable growth.'
+  `${homeSlogan}. Madar helps businesses scale through web and mobile development, UI/UX design, and data-driven digital strategies tailored for measurable growth.`
 const canonicalUrl = computed(() => new URL(route.path || '/', requestURL.origin).toString())
 const ogImageUrl = computed(() => new URL(madarLogoPath, requestURL.origin).toString())
 
