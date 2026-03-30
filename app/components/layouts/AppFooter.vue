@@ -56,6 +56,38 @@
             class="flex items-center gap-2 rounded-xl border border-black-gradient-2 bg-white/5 px-4 py-2 sm:gap-3 sm:px-6 sm:py-3"
           >
             <NuxtLink
+              to="https://tiktok.com/@madar_262"
+              target="_blank"
+              class="footer-social"
+              aria-label="Facebook"
+            >
+              <NuxtImg
+                :src="TiktokSecondary"
+                alt="TikTok icon"
+                class="h-6 w-6 object-contain"
+                width="24"
+                height="24"
+                loading="lazy"
+                decoding="async"
+              />
+            </NuxtLink>
+            <NuxtLink
+              to="https://www.instagram.com/maderegsoft?igsh=ZHFra2NuMjVheTR0"
+              target="_blank"
+              class="footer-social"
+              aria-label="Facebook"
+            >
+              <NuxtImg
+                :src="InstagramSecondary"
+                alt="Instagram icon"
+                class="h-6 w-6 object-contain"
+                width="24"
+                height="24"
+                loading="lazy"
+                decoding="async"
+              />
+            </NuxtLink>
+            <NuxtLink
               to="https://www.facebook.com/profile.php?id=61555600907406"
               target="_blank"
               class="footer-social"
@@ -63,7 +95,7 @@
             >
               <NuxtImg
                 :src="FacebookSecondary"
-                alt=""
+                alt="Facebook icon"
                 class="h-6 w-6 object-contain"
                 width="24"
                 height="24"
@@ -79,7 +111,7 @@
             >
               <NuxtImg
                 :src="TwitterSecondary"
-                alt=""
+                alt="Twitter icon"
                 class="h-6 w-6 object-contain"
                 width="24"
                 height="24"
@@ -95,7 +127,7 @@
             >
               <NuxtImg
                 :src="LinkedinSecondary"
-                alt=""
+                alt="LinkedIn icon"
                 class="h-6 w-6 object-contain"
                 width="24"
                 height="24"
@@ -128,7 +160,7 @@
               contact@Madar.io
             </a>
             <a
-              href="tel:+201014767027"
+              href="tel:+201062679130"
               class="inline-flex items-center gap-2 font-barlow hover:text-primary transition-colors"
               aria-label="Phone"
             >
@@ -141,7 +173,7 @@
                 loading="lazy"
                 decoding="async"
               />
-              +201014767027
+              +201062679130
             </a>
           </div>
 
@@ -178,6 +210,8 @@ import TwitterSecondary from "~/assets/icons/twitter-secondary.svg";
 import LinkedinSecondary from "~/assets/icons/linkedin-secondary.svg";
 import phone from "~/assets/icons/phone.svg";
 import email from "~/assets/icons/mail.svg";
+import InstagramSecondary from "~/assets/icons/instagram-secondary.svg";
+import TiktokSecondary from "~/assets/icons/tiktok-secondary.svg";
 </script>
 <style scoped>
 .footer-social {

@@ -33,7 +33,7 @@
           rel="noopener noreferrer"
           class="block"
         >
-          <article class="partner-card">
+          <article class="partner-card" :style="{ backgroundColor: partner.background_on_dark || '#ffffff05' }">
             <NuxtImg
               :src="partner.image.url"
               :alt="`${partner.name} logo`"
@@ -103,7 +103,7 @@ const goToSlide = (index: number) => {
   margin: 0 auto;
   border-radius: 24px;
   border: 1.15px solid #0083c933;
-  background: #ffffff05;
+  /* background: #ffffff05; */
   color: rgba(255, 255, 255, 0.58);
   display: flex;
   flex-direction: column;

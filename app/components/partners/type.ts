@@ -5,4 +5,5 @@ export interface PartnersResponse {
     image: {
         url: string
     }
+    background_on_dark: string
 }
