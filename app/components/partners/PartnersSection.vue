@@ -1,14 +1,23 @@
 <template>
   <section class="lg:px-16 px-5 sm:px-8 mt-28">
-    <SectionHeader class="[&_span]:bg-primary" label="Our Partners" title="Trusted by Global Leaders" />
-
+    <SectionHeader
+      class="[&_span]:bg-primary"
+      label="Our Partners"
+      title="Trusted by Global Leaders"
+    />
+    <!-- Loading -->
+    <PartnersCardSkeleton v-if="isLoading" :count="3" />
     <Swiper
       class="partners-swiper mt-10 pb-14"
       :modules="[Autoplay, Pagination]"
       :loop="true"
       :centered-slides="true"
       :grab-cursor="true"
-      :autoplay="{ delay: 1800, disableOnInteraction: false, pauseOnMouseEnter: false }"
+      :autoplay="{
+        delay: 1800,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: false
+      }"
       :speed="650"
       :slides-per-view="2.2"
       :space-between="8"
@@ -16,43 +25,50 @@
       @swiper="onSwiper"
       @slideChange="onSlideChange"
     >
-      <SwiperSlide v-for="partner in partners" :key="partner.name + partner.id">
-        <article class="partner-card">
-          <NuxtImg
-            src="/images/partener-logo.png"
-            :alt="`${partner.name} logo`"
-            class="h-14 w-full object-contain"  
-            loading="lazy"
-            decoding="async"
-            format="webp"
-          />
-        </article>
+      <SwiperSlide v-for="partner in partners" :key="partner.id">
+        <NuxtLink
+          v-if="partner.link"
+          :href="partner.link"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="block"
+        >
+          <article class="partner-card">
+            <NuxtImg
+              :src="partner.image.url"
+              :alt="`${partner.name} logo`"
+              class="h-14 w-full object-contain"
+              loading="lazy"
+              decoding="async"
+              format="webp"
+            />
+          </article>
+        </NuxtLink>
       </SwiperSlide>
     </Swiper>
   </section>
 </template>
 <script setup lang="ts">
-import { Autoplay, Pagination } from 'swiper/modules'
-import { Swiper, SwiperSlide } from 'swiper/vue'
-import { ref } from 'vue'
-import type { Swiper as SwiperType } from 'swiper/types'
-import SectionHeader from '../ui/SectionHeader.vue'
-import 'swiper/css'
-import 'swiper/css/pagination'
+import { computed, onMounted, ref } from "vue";
+import { Autoplay, Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/vue";
+import type { Swiper as SwiperType } from "swiper/types";
+import SectionHeader from "../ui/SectionHeader.vue";
+import PartnersCardSkeleton from "./PartnersCardSkeleton.vue";
+import { usePartnersStore } from "./store/partnersStore";
+import { storeToRefs } from "pinia";
+import "swiper/css";
+import "swiper/css/pagination";
 
-const partners = [
-  { id: 1, name: 'Mallora' },
-  { id: 2, name: 'Avenix' },
-  { id: 3, name: 'Nebula' },
-  { id: 4, name: 'Lunaro' },
-  { id: 5, name: 'Orinex' },
-  { id: 6, name: 'Mallora' },
-  { id: 7, name: 'Avenix' },
-  { id: 7, name: 'Avenix' },
-  { id: 8, name: 'Avenix' },
-  { id: 9, name: 'Avenix' },
-  { id: 10, name: 'Avenix' },
-]
+const partnerStore = usePartnersStore();
+const { partners, error, isLoading } = storeToRefs(partnerStore);
+
+onMounted(async () => {
+  await partnerStore.fetchPartners();
+  if (error.value) {
+    console.error("Error fetching partners:", error.value);
+  }
+});
 
 const swiperBreakpoints = {
   360: { slidesPerView: 2, spaceBetween: 8 },
@@ -60,24 +76,24 @@ const swiperBreakpoints = {
   640: { slidesPerView: 3, spaceBetween: 10 },
   768: { slidesPerView: 3.5, spaceBetween: 12 },
   1024: { slidesPerView: 5, spaceBetween: 10 },
-  1280: { slidesPerView: 7, spaceBetween: 14 },
-}
+  1280: { slidesPerView: 7, spaceBetween: 14 }
+};
 
-const swiperInstance = ref<SwiperType | null>(null)
-const activeDot = ref(0)
+const swiperInstance = ref<SwiperType | null>(null);
+const activeDot = ref(0);
 
 const onSwiper = (swiper: SwiperType) => {
-  swiperInstance.value = swiper
-  activeDot.value = swiper.realIndex ?? 0
-}
+  swiperInstance.value = swiper;
+  activeDot.value = swiper.realIndex ?? 0;
+};
 
 const onSlideChange = (swiper: SwiperType) => {
-  activeDot.value = swiper.realIndex ?? 0
-}
+  activeDot.value = swiper.realIndex ?? 0;
+};
 
 const goToSlide = (index: number) => {
-  swiperInstance.value?.slideToLoop(index)
-}
+  swiperInstance.value?.slideToLoop(index);
+};
 </script>
 <style scoped>
 .partner-card {
@@ -135,7 +151,9 @@ const goToSlide = (index: number) => {
   height: 10px;
   border-radius: 9999px;
   background: var(--color-text-primary);
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .partner-dot:hover {
@@ -147,6 +165,4 @@ const goToSlide = (index: number) => {
   transform: scale(1.05);
   width: 20px;
 }
-
-
 </style>

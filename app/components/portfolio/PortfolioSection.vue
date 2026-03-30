@@ -1,8 +1,17 @@
 <template>
   <section id="portfolio" class="lg:px-16 px-5 sm:px-8 mt-28">
-    <SectionHeader class="[&_span]:bg-primary" label="OUR PORTFOLIO" title="AMAZING PROJECTS WITH OUR CLIENTS" />
+    <SectionHeader
+      class="[&_span]:bg-primary"
+      label="OUR PORTFOLIO"
+      title="AMAZING PROJECTS WITH OUR CLIENTS"
+    />
 
+    <!-- Loading -->
+    <PortfolioSkeleton v-if="isLoading" />
+
+    <!-- Content -->
     <Swiper
+      v-else
       class="portfolio-swiper mt-10"
       :modules="[Navigation]"
       :loop="true"
@@ -14,48 +23,68 @@
       <SwiperSlide v-for="project in projects" :key="project.id">
         <article class="portfolio-card">
           <div class="project-image-wrap">
-            <NuxtImg
-              :src="project.image"
-              :alt="project.imageAlt"
-              class="project-image"
-              width="489"
-              height="489"
-              loading="lazy"
-              decoding="async"
-              format="webp"
-            />
+            <NuxtLink
+              :href="project.web_link"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="project-link"
+            >
+              <NuxtImg
+                :src="project.image.url"
+                :alt="project.name"
+                class="project-image"
+                width="489"
+                height="489"
+                loading="lazy"
+                decoding="async"
+                format="webp"
+              />
+              <div class="project-overlay">
+                <div class="overlay-content">
+                  <h4 class="overlay-title">{{ project.name }}</h4>
+                </div>
+              </div>
+            </NuxtLink>
           </div>
 
           <div class="project-content">
-            <p class="case-study-label font-semibold text-xs bg-blue-gradient-2 px-3 py-1.5 rounded font-inter">
+            <p
+              class="case-study-label font-semibold text-xs bg-blue-gradient-2 px-3 py-1.5 rounded font-inter"
+            >
               <span class="case-study-dot"></span>
               CASE STUDY
             </p>
 
-            <div class="project-tags">
-              <span v-for="tag in project.tags" :key="`${project.id}-${tag}`" class="project-tag !bg-white-10 px-3 py-1 rounded">{{ tag }}</span>
-            </div>
-
-            <h3 class="project-title">{{ project.title }}</h3>
-            <p class="text-white-d7 font-inter text-base font-normal">{{ project.description }}</p>
-
-            <ul class="project-benefits">
-              <li v-for="benefit in project.benefits" :key="`${project.id}-${benefit}`">{{ benefit }}</li>
-            </ul>
+            <h3 class="project-title">{{ project.name }}</h3>
+            <p class="text-white-d7 font-inter text-base font-normal">
+              {{ project.short_description }}
+            </p>
           </div>
         </article>
       </SwiperSlide>
     </Swiper>
 
     <div class="mt-5 flex items-center justify-end gap-4">
-      <button type="button" class="portfolio-nav-btn h-10 w-10" aria-label="Previous project" @click="goPrev">
+      <button
+        type="button"
+        class="portfolio-nav-btn h-10 w-10"
+        aria-label="Previous project"
+        @click="goPrev"
+      >
         <img :src="LeftArrow" alt="Left arrow" class="h-4 w-4" />
       </button>
       <p class="text-xl text-white">
-        <span class="font-medium font-inter text-xl">{{ activeSlide + 1 }}</span>
+        <span class="font-medium font-inter text-xl">{{
+          activeSlide + 1
+        }}</span>
         <span class="text-text-secondary"> / {{ projects.length }}</span>
       </p>
-      <button type="button" class="portfolio-nav-btn h-10 w-10" aria-label="Next project" @click="goNext">
+      <button
+        type="button"
+        class="portfolio-nav-btn h-10 w-10"
+        aria-label="Next project"
+        @click="goNext"
+      >
         <img :src="RightArrow" alt="Right arrow" class="h-4 w-4" />
       </button>
     </div>
@@ -63,83 +92,48 @@
 </template>
 
 <script setup lang="ts">
-import { ChevronLeft, ChevronRight } from 'lucide-vue-next'
-import LeftArrow from '~/assets/icons/left-arrow.svg'
-import RightArrow from '~/assets/icons/right-arrow.svg'
-import { ref } from 'vue'
-import { Navigation } from 'swiper/modules'
-import { Swiper, SwiperSlide } from 'swiper/vue'
-import type { Swiper as SwiperType } from 'swiper/types'
-import SectionHeader from '../ui/SectionHeader.vue'
-import 'swiper/css'
+import { onMounted, ref } from "vue";
+import { ChevronLeft, ChevronRight } from "lucide-vue-next";
+import LeftArrow from "~/assets/icons/left-arrow.svg";
+import RightArrow from "~/assets/icons/right-arrow.svg";
+import { Navigation } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/vue";
+import type { Swiper as SwiperType } from "swiper/types";
+import SectionHeader from "../ui/SectionHeader.vue";
+import PortfolioSkeleton from "./PortfolioSkeleton.vue";
+import { usePortfolioStore } from "./store/portfolioStore";
+import { storeToRefs } from "pinia";
+import "swiper/css";
 
-const projects = [
-  {
-    id: 1,
-    title: 'Mallora Platform',
-    image: '/images/mallora.png',
-    imageAlt: 'Mallora platform case study preview',
-    tags: ['MOBILE APP', 'WEBSITE', 'DASHBOARD'],
-    description:
-      'Mallora is a multi-platform system designed to optimize the shopping experience for customers, improve ,operational efficiency for merchants, and provide advanced management tools for platform admins.',
-    benefits: [
-      'Free shipping over order $120',
-      'Pay with multiple credit cards',
-      'Within 30 days for an exchange',
-      'Outstanding premium support',
-    ],
-  },
-  {
-    id: 2,
-    title: 'Nexora Services',
-    image: '/images/mallora.png',
-    imageAlt: 'Nexora services web platform showcase',
-    tags: ['WEBSITE', 'DASHBOARD'],
-    description:
-      'Nexora helps service businesses manage bookings, payments, and team workflows through a unified digital platform.',
-    benefits: [
-      'Real-time booking management',
-      'Secure online payments',
-      'Advanced analytics dashboard',
-      'Role-based team permissions',
-    ],
-  },
-  {
-    id: 3,
-    title: 'Vantage Mobile Suite',
-    image: '/images/mallora.png',
-    imageAlt: 'Vantage mobile application project overview',
-    tags: ['MOBILE APP', 'DASHBOARD'],
-    description:
-      'Vantage is a mobile-first product suite focused on seamless user journeys, fast onboarding, and scalable back-office operations.',
-    benefits: [
-      'Fast onboarding in under 3 minutes',
-      'Cross-platform app performance',
-      'Smart notification workflows',
-      'Dedicated support and maintenance',
-    ],
-  },
-]
+const portfolioStore = usePortfolioStore();
+const { projects, isLoading, error } = storeToRefs(portfolioStore);
 
-const activeSlide = ref(0)
-const swiperInstance = ref<SwiperType | null>(null)
+onMounted(() => {
+  portfolioStore.fetchProjects();
+  if (error.value) {
+    console.error("Error fetching partners:", error.value);
+  }
+});
+
+const activeSlide = ref(0);
+const swiperInstance = ref<SwiperType | null>(null);
 
 const onSwiper = (swiper: SwiperType) => {
-  swiperInstance.value = swiper
-  activeSlide.value = swiper.realIndex ?? 0
-}
+  swiperInstance.value = swiper;
+  activeSlide.value = swiper.realIndex ?? 0;
+};
 
 const onSlideChange = (swiper: SwiperType) => {
-  activeSlide.value = swiper.realIndex ?? 0
-}
+  activeSlide.value = swiper.realIndex ?? 0;
+};
 
 const goPrev = () => {
-  swiperInstance.value?.slidePrev()
-}
+  swiperInstance.value?.slidePrev();
+};
 
 const goNext = () => {
-  swiperInstance.value?.slideNext()
-}
+  swiperInstance.value?.slideNext();
+};
 </script>
 
 <style scoped>
@@ -155,6 +149,13 @@ const goNext = () => {
   overflow: hidden;
 }
 
+.project-link {
+  display: block;
+  position: relative;
+  border-radius: 1.25rem;
+  overflow: hidden;
+}
+
 .project-image {
   width: 100%;
   height: 100%;
@@ -165,8 +166,56 @@ const goNext = () => {
   will-change: transform;
 }
 
-.project-image-wrap:hover .project-image {
+.project-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 131, 201, 0.438) 0%,
+    rgba(0, 83, 128, 0.41) 1%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  border-radius: 1.25rem;
+}
+
+.overlay-content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transform: translateY(10px);
+  transition: transform 0.35s ease;
+}
+
+.overlay-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #fff;
+  font-family: inter;
+}
+
+.overlay-cta {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #fff;
+  font-family: inter;
+  opacity: 0.9;
+}
+
+.project-link:hover .project-image {
   transform: scale(1.08);
+}
+
+.project-link:hover .project-overlay {
+  opacity: 1;
+}
+
+.project-link:hover .overlay-content {
+  transform: translateY(0);
 }
 
 .project-content {
@@ -206,7 +255,7 @@ const goNext = () => {
 }
 
 .project-title {
-  font-weight: 600;
+  font-weight: 500;
   font-family: inter;
   color: var(--color-white);
 }

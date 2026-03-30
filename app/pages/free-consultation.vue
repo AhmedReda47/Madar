@@ -8,7 +8,7 @@
           <div>
             <h2 class="text-xl font-semibold text-white">Consultation Support</h2>
             <p class="mt-3 text-text-secondary">Have questions before starting your project? We are here to help.</p>
-            <a href="mailto:contact@Madar.io" class="mt-1 inline-block text-primary underline underline-offset-4">contact@Madar.io</a>
+            <a href="mailto:madartech26@gamil.com" class="mt-1 inline-block text-primary underline underline-offset-4">contact@Madar.io</a>
           </div>
 
           <div>

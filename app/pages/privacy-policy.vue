@@ -36,7 +36,7 @@
           <h2 class="text-2xl font-medium text-white lg:text-[1.75rem]">Contact</h2>
           <p class="mt-3 leading-7 lg:max-w-4xl lg:text-lg lg:leading-8">
             If you have questions about this policy, please contact us at
-            <a href="mailto:contact@Madar.io" class="text-primary underline underline-offset-4">contact@Madar.io</a>.
+            <a href="mailto:madartech26@gmail.com" class="text-primary underline underline-offset-4">contact@Madar.io</a>.
           </p>
         </section>
       </div>

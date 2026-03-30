@@ -8,13 +8,13 @@
           <div>
             <h2 class="text-xl font-semibold text-white">General Inquiries</h2>
             <p class="mt-3 text-text-secondary">For general questions about Madar:</p>
-            <a href="mailto:contact@Madar.io" class="mt-1 inline-block text-primary underline underline-offset-4">contact@Madar.io</a>
+            <a href="mailto:madartech26@gmail.com" class="mt-1 inline-block text-primary underline underline-offset-4">contact@Madar.io</a>
           </div>
 
           <div>
             <h2 class="text-xl font-semibold text-white">New Business</h2>
             <p class="mt-3 text-text-secondary">Discuss your project idea or partnership opportunity:</p>
-            <a href="mailto:contact@Madar.io" class="mt-1 inline-block text-primary underline underline-offset-4">contact@Madar.io</a>
+            <a href="mailto:madartech26@gmail.com" class="mt-1 inline-block text-primary underline underline-offset-4">contact@Madar.io</a>
           </div>
 
           <div>

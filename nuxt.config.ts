@@ -1,8 +1,14 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  runtimeConfig: {
+    public: {
+      baseURL: 'https://velar500.com/api/v1',
+      apiToken: '5|MfsA1rE5ZOLI7vErFcXIyU23zJEfekgdolSzDCgea2692ce0'
+    }
+  },
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ['@nuxt/image', '@nuxtjs/sitemap'],
+  modules: ['@nuxt/image', '@nuxtjs/sitemap', '@pinia/nuxt'],
   site: {
     url: 'https://your-domain.com',
   },
